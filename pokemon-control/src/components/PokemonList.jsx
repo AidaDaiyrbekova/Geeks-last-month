@@ -15,8 +15,8 @@ export default function PokemonList() {
     status,
   } = useInfiniteQuery({
     queryKey: ['pokemons'],
-    queryFn: ({ pageParam = 1 }) => fetchPokemons(pageParam), // передаем pageParam в API
-    getNextPageParam: (lastPage) => lastPage.next ?? undefined, // если next нет — прекращаем
+    queryFn: ({ pageParam = 1 }) => fetchPokemons(pageParam),
+    getNextPageParam: (lastPage) => lastPage.next ?? undefined,
   })
 
   const sentinelRef = useRef();
@@ -31,7 +31,7 @@ export default function PokemonList() {
           if (e.isIntersecting && hasNextPage) fetchNextPage();
         });
       },
-      { rootMargin: '100px' } // подгружаем заранее
+      { rootMargin: '100px' }
     );
 
     io.observe(el);
@@ -55,7 +55,7 @@ export default function PokemonList() {
         grid={{ gutter: 16, column: 4 }}
         dataSource={pages}
         renderItem={(item) => (
-          <List.Item key={item.name}> {/* добавлен ключ */}
+          <List.Item key={item.name}> {}
             <PokemonCard pokemon={item} />
           </List.Item>
         )}
